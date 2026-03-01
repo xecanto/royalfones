@@ -7,7 +7,7 @@
     <title>Royal Fones</title>
     <meta name="description" content="Royal Fones | The Epitome of Luxury" />
     <meta name="author" content="Lovable" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
 
     <!-- TODO: Update og:title to match your application name -->
     <meta property="og:title" content="Royal Fones" />
@@ -21,6 +21,20 @@
   </head>
 
   <body>
+    <!-- GitHub Pages SPA: restore path encoded by 404.html -->
+    <script>
+      (function () {
+        var p = new URLSearchParams(window.location.search).get("p");
+        if (p) {
+          var h = new URLSearchParams(window.location.search).get("h") || "";
+          window.history.replaceState(
+            null,
+            null,
+            window.location.pathname + decodeURIComponent(p) + decodeURIComponent(h)
+          );
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
