@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 40 20% 90%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 40 20% 90%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 20% 90%;
+
+    --primary: 43 74% 49%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 40 20% 90%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 40 10% 55%;
+
+    --accent: 43 74% 49%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 43 30% 20%;
+    --input: 0 0% 15%;
+    --ring: 43 74% 49%;
+
+    --radius: 0.5rem;
+
+    --gold: 43 74% 49%;
+    --gold-light: 43 80% 65%;
+    --gold-dark: 43 70% 35%;
+    --ivory: 40 30% 92%;
+    --obsidian: 0 0% 4%;
+    --charcoal: 0 0% 10%;
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 40 20% 90%;
+    --sidebar-primary: 43 74% 49%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 40 20% 90%;
+    --sidebar-border: 43 30% 20%;
+    --sidebar-ring: 43 74% 49%;
+
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+  }
+
+  .bg-gradient-gold {
+    background-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold)), hsl(var(--gold-dark)));
+  }
+
+  .border-gradient-gold {
+    border-image: linear-gradient(135deg, hsl(var(--gold-light)), hsl(var(--gold))) 1;
+  }
+
+  .shadow-gold {
+    box-shadow: 0 0 40px -10px hsl(var(--gold) / 0.3);
+  }
+
+  .shadow-gold-sm {
+    box-shadow: 0 0 20px -5px hsl(var(--gold) / 0.2);
+  }
+
+  .glow-gold {
+    filter: drop-shadow(0 0 20px hsl(var(--gold) / 0.4));
+  }
+
+  .glass-dark {
+    @apply backdrop-blur-xl;
+    background: hsl(var(--obsidian) / 0.85);
+  }
+
+  .line-gold {
+    @apply h-px w-full;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold) / 0.5), transparent);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  /* Luxury letter-spacing overrides */
+  .luxury-label {
+    @apply font-body text-[10px] tracking-[0.5em] uppercase text-primary;
+  }
+
+  /* Rich embossed card border */
+  .card-luxury {
+    @apply relative bg-card border border-border rounded-sm overflow-hidden;
+    box-shadow:
+      inset 0 1px 0 hsl(var(--gold) / 0.08),
+      0 1px 3px hsl(var(--obsidian) / 0.6);
+  }
+
+  /* Scale utility not in default Tailwind */
+  .group-hover\:scale-108:hover .group-hover\:scale-108,
+  .group:hover .group-hover\:scale-108 {
+    transform: scale(1.08);
+  }
+
+  /* Decorative diamond ornament */
+  .ornament-diamond::before,
+  .ornament-diamond::after {
+    content: '◆';
+    @apply text-primary/40 text-[8px] mx-2;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--obsidian));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--gold) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--gold) / 0.5);
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── Luxury pulse for gold borders ── */
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(43 74% 49% / 0); }
+  50%       { box-shadow: 0 0 24px 4px hsl(43 74% 49% / 0.25); }
+}
+
+.animate-gold-pulse {
+  animation: gold-pulse 3s ease-in-out infinite;
+}
+
+/* ── Reveal from bottom ── */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-reveal-up {
+  animation: reveal-up 0.7s ease forwards;
+}
+
+/* ── Diamond spin decoration ── */
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  30% { transform: translate(3%, -15%); }
+  50% { transform: translate(12%, 9%); }
+  70% { transform: translate(9%, 4%); }
+  90% { transform: translate(-1%, 7%); }
+}
+
+.grain-overlay::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
