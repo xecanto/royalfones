@@ -51,7 +51,7 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             {/* # add image before logo /favicon.png */}
-             <img src="/favicon.png" alt="Royal Fones Logo" className="w-10 h-10 object-cover object-center" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Royal Fones Logo" className="w-10 h-10 object-cover object-center" />
 
             <span className="font-display text-xl sm:text-2xl font-bold text-gradient-gold tracking-wider">
               ROYAL FONES
