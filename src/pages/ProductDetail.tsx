@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, MessageCircle, Share2, ChevronLeft, ChevronRight, Sparkles, Shield, Package, Globe, Images, Box } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Product3DViewer from "@/components/Product3DViewer";
+const Product3DViewer = lazy(() => import("@/components/Product3DViewer"));
 import { useProduct, useProducts } from "@/hooks/use-products";
 import type { Currency } from "@/lib/database.types";
 import { formatPrice } from "@/lib/database.types";
@@ -123,7 +123,13 @@ const ProductDetail = () => {
                 transition={{ duration: 0.4 }}
                 className="border border-border rounded-sm overflow-hidden bg-card"
               >
-                <Product3DViewer modelUrl={product.model_url} productName={product.name} phoneModel={product.phone_model} />
+                <Suspense fallback={
+                  <div className="aspect-square w-full flex items-center justify-center bg-card">
+                    <div className="w-8 h-8 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
+                  </div>
+                }>
+                  <Product3DViewer modelUrl={product.model_url} productName={product.name} phoneModel={product.phone_model} />
+                </Suspense>
               </motion.div>
             )}
 
